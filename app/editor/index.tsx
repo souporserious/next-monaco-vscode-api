@@ -5,6 +5,10 @@ import './setup'
 import 'monaco-editor/esm/vs/editor/editor.all'
 import 'monaco-editor/esm/vs/language/typescript/monaco.contribution'
 
+monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+  jsx: monaco.languages.typescript.JsxEmit.Preserve,
+})
+
 export default function Editor({ defaultValue }: { defaultValue: string }) {
   const ref = React.useRef<HTMLDivElement>(null)
 

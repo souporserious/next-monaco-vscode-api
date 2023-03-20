@@ -12,16 +12,10 @@ export default {
     MONACO_THEME: await readFile(themePath, 'utf-8'),
   },
   webpack(config, options) {
-    config.module.rules.push(
-      {
-        test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' },
-      },
-      {
-        test: /\.wasm$/,
-        type: 'asset/resource',
-      }
-    )
+    config.module.rules.push({
+      test: /\.wasm$/,
+      type: 'asset/resource',
+    })
 
     return config
   },

@@ -1,4 +1,5 @@
 import 'monaco-editor/esm/vs/editor/editor.all'
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 import { StandaloneServices } from 'vscode/services'
 import getModelEditorServiceOverride from 'vscode/service-override/modelEditor'
 import getDialogsServiceOverride from 'vscode/service-override/dialogs'
@@ -18,8 +19,10 @@ import getLanguageConfigurationServiceOverride, {
 import getLanguagesServiceOverride, {
   setLanguages,
 } from 'vscode/service-override/languages'
-import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker.js'
-import TypeScriptWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker.js'
+// @ts-expect-error
+import EditorWorker from 'worker-loader!monaco-editor/esm/vs/editor/editor.worker.js'
+// @ts-expect-error
+import TypeScriptWorker from 'worker-loader!monaco-editor/esm/vs/language/typescript/ts.worker.js'
 
 interface WorkerConstructor {
   new (): Worker
@@ -67,7 +70,7 @@ StandaloneServices.initialize({
 })
 
 const loader: Partial<Record<string, () => Promise<string>>> = {
-  '/next-monaco.json': () => JSON.parse(process.env.MONACO_THEME),
+  '/next-monaco.json': async () => process.env.MONACO_THEME,
 }
 
 const themes = [
@@ -81,12 +84,14 @@ const themes = [
 
 setDefaultThemes(themes, async (theme) => loader[theme.path.slice(1)]!())
 
+monaco.editor.setTheme('Default Dark+')
+
 setLanguages([
   {
     id: 'typescript',
     extensions: ['.ts', '.tsx'],
     aliases: ['TypeScript', 'ts', 'typescript'],
-    configuration: './typescript-configuration',
+    configuration: './typescript-configuration.json',
   },
 ])
 
@@ -103,11 +108,11 @@ setGrammars(
       scopeName: 'source.ts',
       path: './typescript.tmLanguage.json',
     },
-    // {
-    //   language: 'typescriptreact',
-    //   scopeName: 'source.tsx',
-    //   path: './typescriptreact.tmLanguage.json',
-    // },
+    {
+      language: 'typescript',
+      scopeName: 'source.tsx',
+      path: './typescriptreact.tmLanguage.json',
+    },
   ],
   async (grammar) => {
     switch (grammar.scopeName) {
@@ -115,10 +120,10 @@ setGrammars(
         return JSON.stringify(
           (await import('./TypeScript.tmLanguage.json')).default as any
         )
-      // case 'source.tsx':
-      //   return JSON.stringify(
-      //     (await import('./TypeScriptReact.tmLanguage.json')).default as any
-      //   )
+      case 'source.tsx':
+        return JSON.stringify(
+          (await import('./TypeScriptReact.tmLanguage.json')).default as any
+        )
     }
     throw new Error('grammar not found')
   }
