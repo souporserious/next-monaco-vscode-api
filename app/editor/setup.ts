@@ -1,10 +1,8 @@
 import 'monaco-editor/esm/vs/editor/editor.all'
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 import { StandaloneServices } from 'vscode/services'
-import getModelEditorServiceOverride from 'vscode/service-override/modelEditor'
 import getDialogsServiceOverride from 'vscode/service-override/dialogs'
 import getConfigurationServiceOverride from 'vscode/service-override/configuration'
-import getKeybindingsServiceOverride from 'vscode/service-override/keybindings'
 import getTextmateServiceOverride, {
   setGrammars,
 } from 'vscode/service-override/textmate'
@@ -12,10 +10,6 @@ import getThemeServiceOverride, {
   setDefaultThemes,
   IThemeExtensionPoint,
 } from 'vscode/service-override/theme'
-import geTokenClassificationServiceOverride from 'vscode/service-override/tokenClassification'
-import getLanguageConfigurationServiceOverride, {
-  setLanguageConfiguration,
-} from 'vscode/service-override/languageConfiguration'
 import getLanguagesServiceOverride, {
   setLanguages,
 } from 'vscode/service-override/languages'
@@ -50,13 +44,9 @@ window.MonacoEnvironment = {
 
 // Override services
 StandaloneServices.initialize({
-  ...getModelEditorServiceOverride(async (model, options) => {
-    console.log('trying to open a model', model, options)
-    return undefined
-  }),
   ...getDialogsServiceOverride(),
   ...getConfigurationServiceOverride(),
-  ...getKeybindingsServiceOverride(),
+  ...getLanguagesServiceOverride(),
   ...getTextmateServiceOverride(async () => {
     // @ts-expect-error
     const onigFile = await import('vscode-oniguruma/release/onig.wasm')
@@ -64,9 +54,6 @@ StandaloneServices.initialize({
     return await response.arrayBuffer()
   }),
   ...getThemeServiceOverride(),
-  ...geTokenClassificationServiceOverride(),
-  ...getLanguageConfigurationServiceOverride(),
-  ...getLanguagesServiceOverride(),
 })
 
 const loader: Partial<Record<string, () => Promise<string>>> = {
@@ -75,8 +62,8 @@ const loader: Partial<Record<string, () => Promise<string>>> = {
 
 const themes = [
   {
-    id: 'Default Dark+',
-    label: 'Dark+ (default dark)',
+    id: 'Next Monaco',
+    label: 'Next Monaco',
     uiTheme: 'vs-dark',
     path: './next-monaco.json',
   },
@@ -84,7 +71,7 @@ const themes = [
 
 setDefaultThemes(themes, async (theme) => loader[theme.path.slice(1)]!())
 
-monaco.editor.setTheme('Default Dark+')
+monaco.editor.setTheme('Next Monaco')
 
 setLanguages([
   {
@@ -95,23 +82,17 @@ setLanguages([
   },
 ])
 
-setLanguageConfiguration('./typescript-configuration.json', async () => {
-  return JSON.stringify(
-    (await import('./typescript-language-configuration.json')).default as any
-  )
-})
-
 setGrammars(
   [
     {
       language: 'typescript',
       scopeName: 'source.ts',
-      path: './typescript.tmLanguage.json',
+      path: './Typescript.tmLanguage.json',
     },
     {
       language: 'typescript',
       scopeName: 'source.tsx',
-      path: './typescriptreact.tmLanguage.json',
+      path: './TypescriptReact.tmLanguage.json',
     },
   ],
   async (grammar) => {

@@ -1,8 +1,8 @@
+'use client'
 import * as React from 'react'
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 import { createConfiguredEditor } from 'vscode/monaco'
 import './setup'
-import 'monaco-editor/esm/vs/editor/editor.all'
 import 'monaco-editor/esm/vs/language/typescript/monaco.contribution'
 
 monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
@@ -20,6 +20,7 @@ export default function Editor({ defaultValue }: { defaultValue: string }) {
     )
     const editor = createConfiguredEditor(ref.current!, {
       model,
+      automaticLayout: true,
     })
 
     return () => {
@@ -28,5 +29,5 @@ export default function Editor({ defaultValue }: { defaultValue: string }) {
     }
   }, [])
 
-  return <div ref={ref} style={{ height: '100vh' }} />
+  return <div ref={ref} style={{ height: 200 }} />
 }
