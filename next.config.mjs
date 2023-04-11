@@ -5,10 +5,6 @@ const themePath = resolve(process.cwd(), 'theme.json')
 
 /** @type {import('next').NextConfig} */
 export default {
-  assetPrefix:
-    process.env.NODE_ENV === 'production'
-      ? undefined
-      : 'http://localhost:3000/',
   experimental: {
     appDir: true,
   },

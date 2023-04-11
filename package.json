@@ -12,7 +12,7 @@
     "react-dom": "latest",
     "vscode-oniguruma": "^1.7.0",
     "vscode-textmate": "^9.0.0",
-    "vscode": "npm:@codingame/monaco-vscode-api@^1.76.8"
+    "vscode": "npm:@codingame/monaco-vscode-api@^1.76.9"
   },
   "devDependencies": {
     "@types/node": "18.14.5",

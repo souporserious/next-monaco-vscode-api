@@ -8,7 +8,7 @@ specifiers:
   react: latest
   react-dom: latest
   typescript: 4.9.5
-  vscode: npm:@codingame/monaco-vscode-api@^1.76.8
+  vscode: npm:@codingame/monaco-vscode-api@^1.76.9
   vscode-oniguruma: ^1.7.0
   vscode-textmate: ^9.0.0
 
@@ -17,7 +17,7 @@ dependencies:
   next: 13.3.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  vscode: /@codingame/monaco-vscode-api/1.76.8_ipbnjyeyuvuledotu57dnke5ia
+  vscode: /@codingame/monaco-vscode-api/1.76.9_ipbnjyeyuvuledotu57dnke5ia
   vscode-oniguruma: 1.7.0
   vscode-textmate: 9.0.0
 
@@ -28,8 +28,8 @@ devDependencies:
 
 packages:
 
-  /@codingame/monaco-vscode-api/1.76.8_ipbnjyeyuvuledotu57dnke5ia:
-    resolution: {integrity: sha512-Odv2s/bMYOqAJQo7js4LqMOofoIh+sdP5dPYtIK1ksc+U+LEh3TCkEdlZGl+OUJNPXOSO4R6WbGVduwjipj3fA==}
+  /@codingame/monaco-vscode-api/1.76.9_ipbnjyeyuvuledotu57dnke5ia:
+    resolution: {integrity: sha512-CF/9Ay6qJa0jrftxD1o+HBEy0gMVECN5P7oz3XPeX20Eg22OdI1TUvN/0iZ9ZMOWvkAoRWFBUHUrqdAYzj7oVw==}
     peerDependencies:
       monaco-editor: ~0.36.1
       vscode-oniguruma: ^1.7.0
