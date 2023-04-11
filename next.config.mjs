@@ -5,13 +5,17 @@ const themePath = resolve(process.cwd(), 'theme.json')
 
 /** @type {import('next').NextConfig} */
 export default {
+  assetPrefix:
+    process.env.NODE_ENV === 'production'
+      ? undefined
+      : 'http://localhost:3000/',
   experimental: {
     appDir: true,
   },
   env: {
     MONACO_THEME: await readFile(themePath, 'utf-8'),
   },
-  webpack(config, options) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.wasm$/,
       type: 'asset/resource',

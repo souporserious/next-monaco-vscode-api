@@ -93,10 +93,10 @@ const { registerFile: registerDefaultThemeExtensionFile } = registerExtension(
   defaultThemesExtensions
 )
 
-registerDefaultThemeExtensionFile('./next-monaco.json', async () => {
-  console.log('register default theme')
-  return process.env.MONACO_THEME
-})
+registerDefaultThemeExtensionFile(
+  './next-monaco.json',
+  async () => process.env.MONACO_THEME
+)
 
 monaco.editor.setTheme('Next Monaco')
 
@@ -132,16 +132,12 @@ const extension = {
 
 const { registerFile: registerExtensionFile } = registerExtension(extension)
 
-registerExtensionFile('./Typescript.tmLanguage.json', async () => {
-  console.log('load typescript grammar')
-  return JSON.stringify(
-    (await import('./TypeScript.tmLanguage.json')).default as any
-  )
-})
+registerExtensionFile('./Typescript.tmLanguage.json', async () =>
+  JSON.stringify((await import('./TypeScript.tmLanguage.json')).default as any)
+)
 
-registerExtensionFile('./TypescriptReact.tmLanguage.json', async () => {
-  console.log('load typescript react grammar')
-  return JSON.stringify(
+registerExtensionFile('./TypescriptReact.tmLanguage.json', async () =>
+  JSON.stringify(
     (await import('./TypescriptReact.tmLanguage.json')).default as any
   )
-})
+)
