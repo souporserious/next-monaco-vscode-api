@@ -23,7 +23,7 @@ export default function Editor({ defaultValue }: { defaultValue: string }) {
     const model = monaco.editor.createModel(
       defaultValue,
       'typescript',
-      monaco.Uri.file('index.tsx')
+      monaco.Uri.file('index.ts')
     )
     const editor = createConfiguredEditor(ref.current!, {
       model,
