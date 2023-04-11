@@ -131,13 +131,13 @@ const extension = {
 }
 
 const { registerFile: registerExtensionFile } = registerExtension(extension)
+const tsGrammar = import('./TypeScript.tmLanguage.json')
+const tsxGrammar = import('./TypescriptReact.tmLanguage.json')
 
 registerExtensionFile('./Typescript.tmLanguage.json', async () =>
-  JSON.stringify((await import('./TypeScript.tmLanguage.json')).default as any)
+  JSON.stringify((await tsGrammar).default as any)
 )
 
 registerExtensionFile('./TypescriptReact.tmLanguage.json', async () =>
-  JSON.stringify(
-    (await import('./TypescriptReact.tmLanguage.json')).default as any
-  )
+  JSON.stringify((await tsxGrammar).default as any)
 )
