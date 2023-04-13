@@ -11,8 +11,8 @@ const defaultValue = `
  * @example
  * <Hello name="Penny" />
  */
-function Hello({ name }: { name: string }) {
-  return <div>Hello, {name}</div>
+function sayHello({ name }: { name: string }) {
+  return \`Hello, \${name}!\`
 }
 `.trim()
 

@@ -11,7 +11,7 @@ export default {
   env: {
     MONACO_THEME: await readFile(themePath, 'utf-8'),
   },
-  webpack(config, options) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.wasm$/,
       type: 'asset/resource',
