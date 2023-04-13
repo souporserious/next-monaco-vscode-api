@@ -121,23 +121,13 @@ const extension = {
         scopeName: 'source.ts',
         path: './Typescript.tmLanguage.json',
       },
-      // {
-      //   language: 'typescript',
-      //   scopeName: 'source.tsx',
-      //   path: './TypescriptReact.tmLanguage.json',
-      // },
     ],
   },
 }
 
 const { registerFile: registerExtensionFile } = registerExtension(extension)
 const tsGrammar = import('./TypeScript.tmLanguage.json')
-// const tsxGrammar = import('./TypescriptReact.tmLanguage.json')
 
 registerExtensionFile('./Typescript.tmLanguage.json', async () =>
   JSON.stringify((await tsGrammar).default as any)
 )
-
-// registerExtensionFile('./TypescriptReact.tmLanguage.json', async () =>
-//   JSON.stringify((await tsxGrammar).default as any)
-// )
