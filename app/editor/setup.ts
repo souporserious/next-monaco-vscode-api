@@ -1,7 +1,10 @@
 import 'monaco-editor/esm/vs/editor/editor.all'
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-import { StandaloneServices } from 'vscode/services'
-import { registerExtension } from 'vscode/extensions'
+import { initialize as initializeMonacoService } from 'vscode/services'
+import {
+  registerExtension,
+  initialize as initializeVscodeExtensions,
+} from 'vscode/extensions'
 import getDialogsServiceOverride from 'vscode/service-override/dialogs'
 import getConfigurationServiceOverride from 'vscode/service-override/configuration'
 import getTextmateServiceOverride from 'vscode/service-override/textmate'
@@ -54,22 +57,21 @@ window.MonacoEnvironment = {
   },
 }
 
-StandaloneServices.initialize({
-  ...getDialogsServiceOverride(),
-  ...getConfigurationServiceOverride(),
-  ...getTextmateServiceOverride(),
-  ...getThemeServiceOverride(),
-  ...getLanguagesServiceOverride(),
-})
+Promise.all([
+  initializeMonacoService({
+    ...getDialogsServiceOverride(),
+    ...getConfigurationServiceOverride(monaco.Uri.file('/')),
+    ...getTextmateServiceOverride(),
+    ...getThemeServiceOverride(),
+    ...getLanguagesServiceOverride(),
+  }),
+  initializeVscodeExtensions(),
+])
 
 const defaultThemesExtensions = {
-  name: 'theme-defaults',
-  displayName: '%displayName%',
-  description: '%description%',
-  categories: ['Themes'],
-  version: '1.0.0',
-  publisher: 'vscode',
-  license: 'MIT',
+  name: 'themes',
+  publisher: 'next-monaco',
+  version: '0.0.0',
   engines: {
     vscode: '*',
   },
@@ -82,10 +84,6 @@ const defaultThemesExtensions = {
         path: './next-monaco.json',
       },
     ],
-  },
-  repository: {
-    type: 'git',
-    url: 'https://github.com/microsoft/vscode.git',
   },
 }
 
@@ -101,9 +99,9 @@ registerDefaultThemeExtensionFile(
 monaco.editor.setTheme('Next Monaco')
 
 const extension = {
-  name: 'test',
+  name: 'grammars',
   publisher: 'next-monaco',
-  version: '1.0.0',
+  version: '0.0.0',
   engines: {
     vscode: '*',
   },
@@ -119,15 +117,14 @@ const extension = {
       {
         language: 'typescript',
         scopeName: 'source.ts',
-        path: './Typescript.tmLanguage.json',
+        path: './TypeScript.tmLanguage.json',
       },
     ],
   },
 }
 
 const { registerFile: registerExtensionFile } = registerExtension(extension)
-const tsGrammar = import('./TypeScript.tmLanguage.json')
 
-registerExtensionFile('./Typescript.tmLanguage.json', async () =>
-  JSON.stringify((await tsGrammar).default as any)
+registerExtensionFile('./TypeScript.tmLanguage.json', async () =>
+  JSON.stringify((await import('./TypeScript.tmLanguage.json')).default as any)
 )
