@@ -10,6 +10,7 @@ import getConfigurationServiceOverride from 'vscode/service-override/configurati
 import getTextmateServiceOverride from 'vscode/service-override/textmate'
 import getThemeServiceOverride from 'vscode/service-override/theme'
 import getLanguagesServiceOverride from 'vscode/service-override/languages'
+// import getPreferencesServiceOverride from 'vscode/service-override/preferences'
 
 window.MonacoEnvironment = {
   getWorker: async function (moduleId, label) {
@@ -64,9 +65,11 @@ Promise.all([
     ...getTextmateServiceOverride(),
     ...getThemeServiceOverride(),
     ...getLanguagesServiceOverride(),
+    // ...getPreferencesServiceOverride(),
   }),
   initializeVscodeExtensions(),
-]).then(() => {
+]).then(async () => {
+  console.log('initialized')
   const defaultThemesExtensions = {
     name: 'themes',
     publisher: 'next-monaco',
@@ -129,4 +132,10 @@ Promise.all([
       (await import('./TypeScript.tmLanguage.json')).default as any
     )
   )
+
+  await import('monaco-editor/esm/vs/language/typescript/monaco.contribution')
+
+  monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+    jsx: monaco.languages.typescript.JsxEmit.Preserve,
+  })
 })
