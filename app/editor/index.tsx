@@ -1,38 +1,31 @@
 'use client'
 import * as React from 'react'
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
-import { createConfiguredEditor, createModelReference } from 'vscode/monaco'
+import { createConfiguredEditor } from 'vscode/monaco'
 import './setup'
+import 'monaco-editor/esm/vs/language/typescript/monaco.contribution'
+
+monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+  jsx: monaco.languages.typescript.JsxEmit.Preserve,
+})
 
 export default function Editor({ defaultValue }: { defaultValue: string }) {
   const ref = React.useRef<HTMLDivElement>(null)
-  // const modelRef = React.useRef<monaco.editor.ITextModel>()
-  const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor>()
 
   React.useLayoutEffect(() => {
-    console.log('loading editor')
-
-    editorRef.current = createConfiguredEditor(ref.current!, {
-      model: monaco.editor.createModel(
-        defaultValue,
-        'typescript',
-        monaco.Uri.file('index.ts')
-      ),
+    const model = monaco.editor.createModel(
+      defaultValue,
+      'typescript',
+      monaco.Uri.file('index.ts')
+    )
+    const editor = createConfiguredEditor(ref.current!, {
+      model,
       automaticLayout: true,
     })
 
-    // createModelReference(monaco.Uri.file('index.ts'), defaultValue).then(
-    // (modelRef) => {
-    // editorRef.current = createConfiguredEditor(ref.current!, {
-    //   model: modelRef.object.textEditorModel,
-    //   automaticLayout: true,
-    // })
-    // }
-    // )
-
     return () => {
-      // modelRef.current?.dispose()
-      editorRef.current?.dispose()
+      model.dispose()
+      editor.dispose()
     }
   }, [])
 
