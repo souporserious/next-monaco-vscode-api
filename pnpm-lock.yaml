@@ -1,43 +1,48 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/node': 18.14.5
-  '@types/react': 18.0.28
-  monaco-editor: ^0.36.1
+  '@types/node': 18.15.11
+  '@types/react': 18.0.35
+  monaco-editor: ^0.37.1
   next: latest
   react: latest
   react-dom: latest
-  typescript: 4.9.5
-  vscode: npm:@codingame/monaco-vscode-api@^1.76.9
+  typescript: 5.0.4
+  vscode: npm:@codingame/monaco-vscode-api@^1.78.0
   vscode-oniguruma: ^1.7.0
   vscode-textmate: ^9.0.0
+  yauzl: ^2.10.0
 
 dependencies:
-  monaco-editor: 0.36.1
+  monaco-editor: 0.37.1
   next: 13.3.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
-  vscode: /@codingame/monaco-vscode-api/1.76.9_ipbnjyeyuvuledotu57dnke5ia
+  vscode: /@codingame/monaco-vscode-api/1.78.0_ckavmeqbicipgquaigwjxgfku4
   vscode-oniguruma: 1.7.0
   vscode-textmate: 9.0.0
+  yauzl: 2.10.0
 
 devDependencies:
-  '@types/node': 18.14.5
-  '@types/react': 18.0.28
-  typescript: 4.9.5
+  '@types/node': 18.15.11
+  '@types/react': 18.0.35
+  typescript: 5.0.4
 
 packages:
 
-  /@codingame/monaco-vscode-api/1.76.9_ipbnjyeyuvuledotu57dnke5ia:
-    resolution: {integrity: sha512-CF/9Ay6qJa0jrftxD1o+HBEy0gMVECN5P7oz3XPeX20Eg22OdI1TUvN/0iZ9ZMOWvkAoRWFBUHUrqdAYzj7oVw==}
+  /@codingame/monaco-vscode-api/1.78.0_ckavmeqbicipgquaigwjxgfku4:
+    resolution: {integrity: sha512-mV+ImrH1EdgwkujoYNCnqtZijZA7c1vxXl/Y6OwV1Mo8fZ4fUhMTiiO+0zaQZqLzM5GX/l7qfxNVOLV2pUJtmg==}
     peerDependencies:
-      monaco-editor: ~0.36.1
+      monaco-editor: ~0.37.1
       vscode-oniguruma: ^1.7.0
       vscode-textmate: ^9.0.0
+      yauzl: ^2.10.0
     dependencies:
-      monaco-editor: 0.36.1
+      '@types/node': 18.15.11
+      monaco-editor: 0.37.1
       vscode-oniguruma: 1.7.0
       vscode-textmate: 9.0.0
+      yauzl: 2.10.0
     dev: false
 
   /@next/env/13.3.0:
@@ -131,16 +136,15 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@types/node/18.14.5:
-    resolution: {integrity: sha512-CRT4tMK/DHYhw1fcCEBwME9CSaZNclxfzVMe7GsO6ULSwsttbj70wSiX6rZdIjGblu93sTJxLdhNIT85KKI7Qw==}
-    dev: true
+  /@types/node/18.15.11:
+    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
 
-  /@types/react/18.0.28:
-    resolution: {integrity: sha512-RD0ivG1kEztNBdoAK7lekI9M+azSnitIn85h4iOiaLjaTrMjzslhaqCGaI4IyCJ1RljWiLCEu4jyrLLgqxBTew==}
+  /@types/react/18.0.35:
+    resolution: {integrity: sha512-6Laome31HpetaIUGFWl1VQ3mdSImwxtFZ39rh059a1MNnKGqBpC88J6NJ8n/Is3Qx7CefDGLgf/KhN/sYCf7ag==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
@@ -150,6 +154,10 @@ packages:
   /@types/scheduler/0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
     dev: true
+
+  /buffer-crc32/0.2.13:
+    resolution: {integrity: sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==}
+    dev: false
 
   /busboy/1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
@@ -170,6 +178,12 @@ packages:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
     dev: true
 
+  /fd-slicer/1.1.0:
+    resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
+    dependencies:
+      pend: 1.2.0
+    dev: false
+
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
     dev: false
@@ -181,8 +195,8 @@ packages:
       js-tokens: 4.0.0
     dev: false
 
-  /monaco-editor/0.36.1:
-    resolution: {integrity: sha512-/CaclMHKQ3A6rnzBzOADfwdSJ25BFoFT0Emxsc4zYVyav5SkK9iA6lEtIeuN/oRYbwPgviJT+t3l+sjFa28jYg==}
+  /monaco-editor/0.37.1:
+    resolution: {integrity: sha512-jLXEEYSbqMkT/FuJLBZAVWGuhIb4JNwHE9kPTorAVmsdZ4UzHAfgWxLsVtD7pLRFaOwYPhNG9nUCpmFL1t/dIg==}
     dev: false
 
   /nanoid/3.3.6:
@@ -233,6 +247,10 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /pend/1.2.0:
+    resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
     dev: false
 
   /picocolors/1.0.0:
@@ -302,9 +320,9 @@ packages:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: false
 
-  /typescript/4.9.5:
-    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
-    engines: {node: '>=4.2.0'}
+  /typescript/5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
+    engines: {node: '>=12.20'}
     hasBin: true
     dev: true
 
@@ -314,4 +332,11 @@ packages:
 
   /vscode-textmate/9.0.0:
     resolution: {integrity: sha512-Cl65diFGxz7gpwbav10HqiY/eVYTO1sjQpmRmV991Bj7wAoOAjGQ97PpQcXorDE2Uc4hnGWLY17xme+5t6MlSg==}
+    dev: false
+
+  /yauzl/2.10.0:
+    resolution: {integrity: sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==}
+    dependencies:
+      buffer-crc32: 0.2.13
+      fd-slicer: 1.1.0
     dev: false
